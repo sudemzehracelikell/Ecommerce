@@ -1,4 +1,6 @@
-namespace WebApp1.models
+using WebApp1.models;
+
+namespace Ecommerce.models
 {
     public class ProductOrder
     {

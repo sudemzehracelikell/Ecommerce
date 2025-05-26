@@ -12,4 +12,3 @@ public class Brand
         
     public ICollection<Product> Products { get; set; }
 }
-// kodu

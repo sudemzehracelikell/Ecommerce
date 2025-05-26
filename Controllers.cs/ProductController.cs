@@ -44,20 +44,6 @@ public class ProductController : ControllerBase
     {
         _repository.Delete(id);
     }
-
-    /*[HttpPut("{id}")]
-    public IActionResult UpdateProduct(int id, [FromBody] Product updatedProduct)
-    {
-        if (id != updatedProduct.Id)
-            return BadRequest("Id uyumsuzluğu");
-
-        var existingProduct = _repository.GetById(id);
-        if (existingProduct == null)
-            return NotFound();
-
-
-
-    }*/
     [HttpPut]
     public void UpdateProduct(Product newProduct)
     {

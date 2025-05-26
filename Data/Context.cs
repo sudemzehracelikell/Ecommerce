@@ -1,3 +1,4 @@
+using Ecommerce.models;
 using ECommerce.Models;
 using Microsoft.EntityFrameworkCore;
 using WebApp1.models;

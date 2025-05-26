@@ -11,4 +11,4 @@ namespace WebApp1.models
         public ICollection<Product> Products { get; set; }
         
     }
-} //Kategori: adı, kodu, açıklama, durum(aktif,pasif)
+} //Category: name, code, description, status (active, passive)

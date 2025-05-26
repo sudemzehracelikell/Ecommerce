@@ -1,3 +1,4 @@
+using Ecommerce.models;
 using ECommerce.Models;
 
 namespace WebApp1.models
@@ -22,4 +23,4 @@ namespace WebApp1.models
         public ICollection<ProductOrder>? ProductOrders { get; set; }
         
     }
-}//Ürün: *Marka, *Kategori, *adı, *kodu, *kdv oranı, durum(aktif,pasif), açıklama, *fiyat, *stok
+}//Product: *Brand, *Category, *name, *code, *VAT rate, status (active, passive), description, *price, *stock
