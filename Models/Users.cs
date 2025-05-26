@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using ECommerce.Models;
 
 namespace WebApp1.models
 {
@@ -14,10 +15,5 @@ namespace WebApp1.models
         
         public ICollection<Order>  Orders { get; set; }
     }
-}//Üye: id, adı, tipi(3 tane), e-posta, telefonNumarası, durum(akit, pasif)
-    public enum UserType
-    {
-        Personal,
-        Corporate,
-        Distributor
-    }
+}//Member: id, name, type (3), email, phone number, status (active, passive)
+    
