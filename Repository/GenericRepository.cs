@@ -9,70 +9,49 @@ namespace ECommerce.Repository;
 public class GenericRepository<TEntitiy> : IGenericRepository<TEntitiy> where TEntitiy : class
 {
     private readonly Context _context;
-
+    private readonly DbSet<TEntitiy> table;
     public GenericRepository(Context context)
     {
-        _context = context;
+        _context = context; //dependecy injection
+        table= _context.Set<TEntitiy>();
+        
     }
 
-    public IEnumerable<TEntitiy> GetAll()
+    public async Task SaveChanges()
     {
-        var products = _context.Set<TEntitiy>().AsNoTracking();
+        await _context.SaveChangesAsync();
+    }
+
+    public async Task<IEnumerable<TEntitiy>> GetAll()
+    {
+        var products = await table.ToListAsync();
         return products;
     }
 
-    public TEntitiy GetById(int id)
+    public async Task<TEntitiy >GetById(int id)
     {
-        var product = _context.Set<TEntitiy>().Find(id);
+        var product =await table.FindAsync(id) ;
         return product;
     }
 
-    public void Create(TEntitiy newEntitiy)
+    public  async Task Create(TEntitiy newEntitiy)
     {
-        _context.Set<TEntitiy>().Add(newEntitiy);
-        _context.SaveChanges();
+        await table.AddAsync(newEntitiy);
+        await SaveChanges();
     }
 
-    public void Delete(int id)
+    public async Task Delete(int id)
     {
-        var deletedProduct = GetById(id);
-        _context.Set<TEntitiy>().Remove(deletedProduct);
-        _context.SaveChanges();
+        var deletedProduct = await GetById(id);
+        table.Remove(deletedProduct);
+        await SaveChanges();
     }
 
-    public void Update(TEntitiy newEntity)
-    {
-        _context.Set<TEntitiy>().Update(newEntity);
-        _context.SaveChanges();
-    }
 
-    public Task<IEnumerable<TEntitiy>> GetAllAsync()
+    public async Task Update(TEntitiy newEntity)
     {
-        throw new NotImplementedException();
+        table.Update(newEntity);
+        await SaveChanges();
     }
-
-    public Task<TEntitiy?> GetByIdAsync(int id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<TEntitiy> CreateAsync(TEntitiy newEntity)
-    {
-        throw new NotImplementedException();
-    }
-
-    public TEntitiy UpdateAsync(TEntitiy entity)
-    {
-        throw new NotImplementedException();
-    }
-
-    public void DeleteAsync(int id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task SaveAsync()
-    {
-        throw new NotImplementedException();
-    }
-}
+    
+}  //await usage

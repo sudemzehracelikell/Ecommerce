@@ -1,6 +1,6 @@
 using Ecommerce.models;
 
-namespace WebApp1.models
+namespace ECommerce.models
 {
     public class Order
     {
