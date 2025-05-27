@@ -1,7 +1,7 @@
 using Ecommerce.models;
 using ECommerce.Models;
 
-namespace WebApp1.models
+namespace ECommerce.models
 {
     public class Product
     {

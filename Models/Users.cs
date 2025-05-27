@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using ECommerce.Models;
 
-namespace WebApp1.models
+namespace ECommerce.models
 {
     public class User
     {

@@ -1,4 +1,4 @@
-using WebApp1.models;
+using ECommerce.models;
 
 namespace Ecommerce.models
 {

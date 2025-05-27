@@ -1,7 +1,6 @@
-using ECommerce.Models;
 using ECommerce.Repository;
 using Microsoft.AspNetCore.Mvc;
-using WebApp1.models;
+using ECommerce.models;
 
 namespace ECommerce.Controllers;
 using ECommerce.Models;
@@ -9,9 +8,10 @@ using ECommerce.Models;
 [ApiController]
 
 [Route("api/productController")]
-public class ProductController : ControllerBase
+public class ProductController : ControllerBase  //why?
 {
-    private readonly IGenericRepository<Product> _repository;
+
+    private readonly IGenericRepository<Product> _repository; // why use interface?
 
     public ProductController(IGenericRepository<Product> repository)
     {
@@ -19,35 +19,35 @@ public class ProductController : ControllerBase
     }
 
     [HttpGet]
-    public IEnumerable<Product> GetAllProducts()
+    public async Task<IEnumerable<Product>> GetAllProducts()
     {
-        var products = _repository.GetAll();
+        var products = await _repository.GetAll();
         return products;
     }
     [HttpGet("{id}")]
-    public Product GetByIdProduct(int id)
+    public async Task < Product >GetByIdProduct(int id)
     {
-        var product = _repository.GetById(id);
+        var product = await _repository.GetById(id);
         if (product != null)
             return product;
         return null;
     }
 
     [HttpPost]
-    public void CreateProduct(Product newProduct)
+    public async Task CreateProduct(Product newProduct)
     {
-        _repository.Create(newProduct);
+       await _repository.Create(newProduct);
     }
 
     [HttpDelete("{id}")]
-    public void DeleteProduct(int id)
+    public async Task DeleteProduct(int id)
     {
-        _repository.Delete(id);
+        await _repository.Delete(id);
     }
     [HttpPut]
-    public void UpdateProduct(Product newProduct)
+    public async Task UpdateProduct(Product newProduct)
     {
-        _repository.Update(newProduct);
+        await _repository.Update(newProduct);
     }
 
 }
