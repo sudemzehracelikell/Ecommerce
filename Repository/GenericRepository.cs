@@ -1,57 +1,80 @@
-using ECommerce.Data;
+
+
+using System.Linq.Expressions;
+using Ecommerce.Data;
 using Microsoft.EntityFrameworkCore;
-using ECommerce.Models;
-using Microsoft.AspNetCore.Mvc;
 
+namespace Ecommerce.Repository;
 
-namespace ECommerce.Repository;
-
-public class GenericRepository<TEntitiy> : IGenericRepository<TEntitiy> where TEntitiy : class
+public class GenericRepository<TEntity> : IQueryableRepository<TEntity>, IEnumarableRepository<TEntity> where TEntity : class
 {
+
     private readonly Context _context;
-    private readonly DbSet<TEntitiy> table;
+    private readonly DbSet<TEntity> table;
+
     public GenericRepository(Context context)
     {
-        _context = context; //dependecy injection
-        table= _context.Set<TEntitiy>();
-        
+        _context = context;
+        table = _context.Set<TEntity>();
     }
 
-    public async Task SaveChanges()
+    //Ienumarable methods
+    public async Task SaveChange()
     {
         await _context.SaveChangesAsync();
     }
 
-    public async Task<IEnumerable<TEntitiy>> GetAll()
+    public async Task<IEnumerable<TEntity>> GetAll()
     {
-        var products = await table.ToListAsync();
-        return products;
+        var entities = await table.ToListAsync();
+        return entities;
     }
 
-    public async Task<TEntitiy >GetById(int id)
+    public async Task<TEntity> GetById(int id)
     {
-        var product =await table.FindAsync(id) ;
-        return product;
+        var entity = await table.FindAsync(id);
+        return entity;
     }
 
-    public  async Task Create(TEntitiy newEntitiy)
+    public async Task Create(TEntity newEntitiy)
     {
         await table.AddAsync(newEntitiy);
-        await SaveChanges();
+        await SaveChange();
     }
 
     public async Task Delete(int id)
     {
-        var deletedProduct = await GetById(id);
-        table.Remove(deletedProduct);
-        await SaveChanges();
+        var entity = await GetById(id);
+        table.Remove(entity);
+        await SaveChange();
     }
 
-
-    public async Task Update(TEntitiy newEntity)
+    public async Task Update(TEntity newEntity)
     {
         table.Update(newEntity);
-        await SaveChanges();
+        await SaveChange();
     }
-    
-}  //await usage
+
+
+    //IQueryable methods
+    public IQueryable<TEntity> GetAllQueryable()
+    {
+        return table.AsQueryable();
+    }
+
+    public IQueryable<TEntity> FilterBy(Expression<Func<TEntity, bool>> predicate)
+    {
+        return table.Where(predicate);
+    }
+
+    public IQueryable<TEntity> GetWithIncludes(params Expression<Func<TEntity, object>>[] includes)
+    {
+        IQueryable<TEntity> query = table;
+        foreach (var include in includes)
+        {
+            query = query.Include(include);
+        }
+        return query;
+    }
+
+}
