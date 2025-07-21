@@ -129,3 +129,14 @@ C:\Users\szc\RiderProjects\ECommerce\ECommerce\bin\Debug\net9.0\zh-Hant\Microsof
 C:\Users\szc\RiderProjects\ECommerce\ECommerce\bin\Debug\net9.0\Npgsql.dll
 C:\Users\szc\RiderProjects\ECommerce\ECommerce\bin\Debug\net9.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
 C:\Users\szc\RiderProjects\ECommerce\ECommerce\obj\Debug\net9.0\ECommerce.sourcelink.json
+C:\Users\szc\RiderProjects\ECommerce\obj\Debug\net9.0\ECommerce.csproj.AssemblyReference.cache
+C:\Users\szc\RiderProjects\ECommerce\obj\Debug\net9.0\ECommerce.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\szc\RiderProjects\ECommerce\obj\Debug\net9.0\ECommerce.AssemblyInfoInputs.cache
+C:\Users\szc\RiderProjects\ECommerce\obj\Debug\net9.0\ECommerce.AssemblyInfo.cs
+C:\Users\szc\RiderProjects\ECommerce\obj\Debug\net9.0\ECommerce.csproj.CoreCompileInputs.cache
+C:\Users\szc\RiderProjects\ECommerce\obj\Debug\net9.0\ECommerce.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\szc\RiderProjects\ECommerce\obj\Debug\net9.0\ECommerce.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\szc\RiderProjects\ECommerce\obj\Debug\net9.0\ECommerce.sourcelink.json
+C:\Users\szc\RiderProjects\ECommerce\obj\Debug\net9.0\ECommerce.dll
+C:\Users\szc\RiderProjects\ECommerce\obj\Debug\net9.0\refint\ECommerce.dll
+C:\Users\szc\RiderProjects\ECommerce\obj\Debug\net9.0\ECommerce.pdb

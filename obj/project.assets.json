@@ -2852,11 +2852,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\szc\\RiderProjects\\ECommerce\\ECommerce\\ECommerce.csproj",
+      "projectUniqueName": "C:\\Users\\szc\\RiderProjects\\ECommerce\\ECommerce.csproj",
       "projectName": "ECommerce",
-      "projectPath": "C:\\Users\\szc\\RiderProjects\\ECommerce\\ECommerce\\ECommerce.csproj",
+      "projectPath": "C:\\Users\\szc\\RiderProjects\\ECommerce\\ECommerce.csproj",
       "packagesPath": "C:\\Users\\szc\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\szc\\RiderProjects\\ECommerce\\ECommerce\\obj\\",
+      "outputPath": "C:\\Users\\szc\\RiderProjects\\ECommerce\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\szc\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -2927,7 +2927,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.204/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.205/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
