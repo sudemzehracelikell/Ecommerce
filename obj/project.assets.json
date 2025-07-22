@@ -2852,11 +2852,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\szc\\Desktop\\ECommerce\\ECommerce\\ECommerce.csproj",
+      "projectUniqueName": "C:\\Users\\szc\\Desktop\\Proje\\Ecommerce\\ECommerce.csproj",
       "projectName": "ECommerce",
-      "projectPath": "C:\\Users\\szc\\Desktop\\ECommerce\\ECommerce\\ECommerce.csproj",
+      "projectPath": "C:\\Users\\szc\\Desktop\\Proje\\Ecommerce\\ECommerce.csproj",
       "packagesPath": "C:\\Users\\szc\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\szc\\Desktop\\ECommerce\\ECommerce\\obj\\",
+      "outputPath": "C:\\Users\\szc\\Desktop\\Proje\\Ecommerce\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\szc\\AppData\\Roaming\\NuGet\\NuGet.Config"

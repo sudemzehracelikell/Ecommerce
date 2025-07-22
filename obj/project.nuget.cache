@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "SrKK5/t3wxA=",
+  "dgSpecHash": "LAGxsqBzzb4=",
   "success": true,
-  "projectFilePath": "C:\\Users\\szc\\Desktop\\ECommerce\\ECommerce\\ECommerce.csproj",
+  "projectFilePath": "C:\\Users\\szc\\Desktop\\Proje\\Ecommerce\\ECommerce.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\szc\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\szc\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.5\\microsoft.aspnetcore.openapi.9.0.5.nupkg.sha512",
