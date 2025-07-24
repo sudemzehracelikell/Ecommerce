@@ -1,0 +1,18 @@
+[core]
+    compression = 9
+    packedGitLimit = 512m
+    packedGitWindowSize = 512m
+
+[pack]
+    deltaCacheSize = 2047m
+    packSizeLimit = 2047m
+    windowMemory = 2047m
+
+[http]
+    postBuffer = 524288000
+    maxRequestBuffer = 100M
+    lowSpeedLimit = 1000
+    lowSpeedTime = 600
+
+[git]
+    compression = 9
