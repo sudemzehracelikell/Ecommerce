@@ -18,7 +18,9 @@ public class CategoryController : GenericController<Category>
     [HttpGet("by-name/{name}")]
     public IActionResult GetCategoryByName(string name)
     {
-        var categories = _service.GetCategoryByName(name);
-        return categories != null ? Ok(categories.ToList()) : NotFound();
+        var query = _service.GetCategoryByName(name);
+        var categories = query.ToList();
+        
+        return categories is {Count :> 0} ? Ok(categories.ToList()) : NotFound();
     }
 }

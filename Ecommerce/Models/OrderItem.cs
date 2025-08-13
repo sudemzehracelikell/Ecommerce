@@ -2,9 +2,8 @@ using System.Text.Json.Serialization;
 
 namespace Ecommerce.Models;
 
-public class OrderItem
+public class OrderItem : BaseEntity
 {
-    public int Id { get; set; }
 
     [JsonIgnore]
     public int? OrderId { get; set; }

@@ -2,6 +2,7 @@
 
 using System.Linq.Expressions;
 using Ecommerce.Data;
+using Ecommerce.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Ecommerce.Repository;
@@ -10,7 +11,7 @@ public class GenericRepository<TEntity> : IQueryableRepository<TEntity>, IEnumar
 {
 
     private readonly Context _context;
-    private readonly DbSet<TEntity> table;
+    private readonly DbSet<TEntity> table; // !!!!!!!
 
     public GenericRepository(Context context)
     {

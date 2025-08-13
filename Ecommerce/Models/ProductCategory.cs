@@ -1,8 +1,7 @@
 namespace Ecommerce.Models
 {
-    public class ProductCategory
+    public class ProductCategory : BaseEntity
     {
-        public int Id { get; set; }
         public int Quantity { get; set; }
 
         public int ProductId { get; set; }

@@ -45,7 +45,7 @@ namespace Ecommerce.Data
 
             //OrderItem
             modelBuilder.Entity<OrderItem>()
-                .HasKey(oi => new { oi.OrderId, oi.ProductVariantId });
+                .HasKey(oi => new { oi.OrderId, oi.ProductVariantId });  
 
             modelBuilder.Entity<OrderItem>()
                 .HasOne(oi => oi.ProductVariant)

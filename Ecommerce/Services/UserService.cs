@@ -14,5 +14,23 @@ public class UserService : BaseService<User>, Interfaces.IUserService
         var u = _queryRepository.FilterBy(u => u.Name == name);
         return u ?? null;
     }
+
+    public User? Authenticate(string name, string password)
+    {
+        var user = _queryRepository.FilterBy(u => u.Name ==name).FirstOrDefault();
+        if (user == null) return null;
+
+        // BCrypt ile şifre doğrulama
+        if (!BCrypt.Net.BCrypt.Verify(password, user.PasswordHash))
+            return null;
+
+        return user;
+    }
+
+    public void CreateUser(User user, string password)
+    {
+        user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(password);
+        _enumRepository.Update(user);
     
+    }
 }

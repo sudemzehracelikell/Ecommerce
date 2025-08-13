@@ -9,8 +9,9 @@ namespace Ecommerce.Controllers;
 [Route("api/[controller]")]
 public class UserController : GenericController<User>
 {
+    
     private new readonly IUserService _service;
-
+    private readonly ITokenService _tokenService;
     public UserController(IUserService service) : base(service)
     {
         _service = service;

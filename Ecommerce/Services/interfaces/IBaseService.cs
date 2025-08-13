@@ -14,4 +14,4 @@ public interface IBaseService<TEntity> where TEntity : class
     IQueryable<TEntity> FilterBy(Expression<Func<TEntity, bool>> predicate);
     IQueryable<TEntity> GetWithIncludes(params Expression<Func<TEntity, object>>[] includes);
     
-}   
+}

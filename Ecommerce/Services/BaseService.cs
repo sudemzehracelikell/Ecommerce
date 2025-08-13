@@ -1,9 +1,10 @@
 using System.Linq.Expressions;
+using Ecommerce.Models;
 using Ecommerce.Repository;
 
 namespace Ecommerce.Services;
 
-public class BaseService<TEntity> : Interfaces.IBaseService<TEntity> where TEntity : class
+public class BaseService<TEntity> : Interfaces.IBaseService<TEntity> where TEntity : BaseEntity
 {
     protected readonly IEnumarableRepository<TEntity> _enumRepository;
     protected readonly IQueryableRepository<TEntity> _queryRepository;

@@ -2,9 +2,8 @@ using System.Text.Json.Serialization;
 
 namespace Ecommerce.Models
 {
-    public class Product
+    public class Product: BaseEntity
     {
-        public int Id { get; set; }
         public int Code { get; set; }
         public string? Name { get; set; }
         public float KDV { get; set; }
@@ -16,7 +15,7 @@ namespace Ecommerce.Models
         public int? BrandId { get; set; }
         public Brand? Brand { get; set; }
 
-        [JsonIgnore]
+        [JsonIgnore] // ? 
         public ICollection<ProductCategory>? ProductCategory { get; set; }
         
         [JsonIgnore]

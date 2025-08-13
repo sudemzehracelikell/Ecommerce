@@ -9,10 +9,9 @@ public class CategoryService : BaseService<Category>, Interfaces.ICategoryServic
     : base(_enumRepository, _queryRepository)
     { }
 
-    public IQueryable<Category>? GetCategoryByName(string name)
+    public IQueryable<Category> GetCategoryByName(string name)
     {
-        var c = _queryRepository.FilterBy(c => c.Name == name);
-        return c ?? null;
+        return _queryRepository.FilterBy(c => c.Name == name);
     }
     
 }

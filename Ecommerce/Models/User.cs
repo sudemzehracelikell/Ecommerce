@@ -1,8 +1,7 @@
 namespace Ecommerce.Models
 {
-    public class User
+    public class User : BaseEntity
     {
-        public int Id { get; set; }
         public string? Name { get; set; }
         public string? EMail { get; set; }
         public string? PhoneNumber { get; set; }
@@ -10,6 +9,8 @@ namespace Ecommerce.Models
         public int Code {get;set;}
         public Boolean State { get; set; }
         
+        public string PasswordHash { get; set; }
         public ICollection<Order>?  Orders { get; set; }
+        
     }
 }

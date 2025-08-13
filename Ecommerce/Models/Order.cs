@@ -1,8 +1,7 @@
 namespace Ecommerce.Models
 {
-    public class Order
+    public class Order : BaseEntity
     {
-        public int Id { get; set; }
         public int Code { get; set; }
         public DateTime OrderPlaced { get; set; }
 
