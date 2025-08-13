@@ -29,7 +29,7 @@ const Users = () => {
   const fetchUsers = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("http://localhost:5432/api/user/enum-all");
+      const res = await axios.get("http://localhost:5083/api/user/enum-all");
       setUsers(res.data);
       setFiltered(res.data);
     } catch (error) {
@@ -42,7 +42,7 @@ const Users = () => {
 
   const fetchUserTypes = async () => {
     try {
-      const res = await axios.get("http://localhost:5432/api/user/usertypes"); // enum endpoint'in varsa
+      const res = await axios.get("http://localhost:5083/api/user/usertypes"); // enum endpoint'in varsa
       setUserTypes(res.data);
     } catch (error) {
       console.error("User type alınamadı:", error);
@@ -104,7 +104,7 @@ const Users = () => {
 
     try {
       setLoading(true);
-      const res = await axios.post("http://localhost:5432/api/user", {
+      const res = await axios.post("http://localhost:5083/api/user", {
         name: newUser.name,
         eMail: newUser.eMail,
         phoneNumber: newUser.phoneNumber,

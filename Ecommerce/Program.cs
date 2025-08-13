@@ -108,7 +108,6 @@ builder.Services.AddSwaggerGen(c =>
         { securityScheme, Array.Empty<string>() }
     });
 });
-app = builder.Build();
 
 // ---- Pipeline ----
 if (app.Environment.IsDevelopment())

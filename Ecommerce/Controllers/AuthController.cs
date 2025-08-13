@@ -9,7 +9,7 @@ namespace Ecommerce.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IUserService _userService;
-        private readonly ITokenService _tokenService;
+        private readonly ITokenService _tokenService; //JWT token üretmek için servis
 
         public AuthController(IUserService userService, ITokenService tokenService)
         {
@@ -20,15 +20,15 @@ namespace Ecommerce.Controllers
         [HttpPost("register")]
         public IActionResult Register([FromBody] User request)
         {
-            // Kullanıcı adı kontrolü
+            
             if (_userService.GetUserByName(request.Name!)?.Any() == true)
                 return BadRequest("This username is already taken.");
 
             // Parola hashleme
-            request.PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.PasswordHash);
+            request.PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.PasswordHash); //hashleme algoritması
 
             request.State = true; // Varsayılan aktif kullanıcı
-            _userService.Update(request);
+            _userService.Create(request); // Kullanıcıyı veri tabanına kaydet
 
             return Ok("User registered successfully.");
         }
@@ -42,8 +42,8 @@ namespace Ecommerce.Controllers
                 return Unauthorized("Invalid credentials");
             }
 
-            var token = _tokenService.GenerateToken(user);
-            return Ok(new { token });
+            var token = _tokenService.GenerateToken(user); // JWT token üret
+            return Ok(new { token }); // Token’ı JSON olarak döndür
         }
     }
 }

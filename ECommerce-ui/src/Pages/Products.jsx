@@ -38,7 +38,7 @@ const Products = () => {
       console.log("API çağrısı başlatılıyor...");
       
       console.log("Products çekiliyor...");
-      const productsRes = await axios.get("http://localhost:5432/api/product/enum-all");
+      const productsRes = await axios.get("http://localhost:5083/api/product/enum-all");
       console.log("Products başarılı:", productsRes.data);
       
       if (productsRes.data.length > 0) {
@@ -51,7 +51,7 @@ const Products = () => {
 
       console.log("Brands çekiliyor...");
       try {
-        const brandsRes = await axios.get("http://localhost:5432/api/brand/enum-all");
+        const brandsRes = await axios.get("http://localhost:5083/api/brand/enum-all");
         console.log("Brands response:", brandsRes);
         console.log("Brands data:", brandsRes.data);
         console.log("Brands type:", typeof brandsRes.data);
@@ -149,7 +149,7 @@ const Products = () => {
       setLoading(true);
       
      
-      const response = await axios.post("http://localhost:5432/api/product", {
+      const response = await axios.post("http://localhost:5083/api/product", {
         code: parseInt(newProduct.code),
         name: newProduct.name,
         brandId: parseInt(newProduct.brandId),

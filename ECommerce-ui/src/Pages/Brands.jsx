@@ -24,7 +24,7 @@ const Brands = () => {
   const fetchBrands = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("http://localhost:5432/api/brand/enum-all");
+      const res = await axios.get("http://localhost:5083/api/brand/enum-all");
       setBrands(res.data);
       setFiltered(res.data);
     } catch (error) {
@@ -84,7 +84,7 @@ const Brands = () => {
 
     try {
       setLoading(true);
-      const res = await axios.post("http://localhost:5432/api/brand", {
+      const res = await axios.post("http://localhost:5083/api/brand", {
         name: newBrand.name,
         code: newBrand.code,
         description: newBrand.description,

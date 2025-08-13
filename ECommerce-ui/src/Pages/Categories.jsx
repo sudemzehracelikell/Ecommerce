@@ -24,7 +24,7 @@ const Categories = () => {
   const fetchCategories = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("http://localhost:5432/api/category/enum-all");
+      const res = await axios.get("http://localhost:5083/api/category/enum-all");
       setCategories(res.data);
       setFiltered(res.data);
     } catch (error) {
@@ -84,7 +84,7 @@ const Categories = () => {
 
     try {
       setLoading(true);
-      const res = await axios.post("http://localhost:5432/api/category", {
+      const res = await axios.post("http://localhost:5083/api/category", {
         name: newCategory.name,
         code: newCategory.code,
         description: newCategory.description,
