@@ -11,7 +11,7 @@ public class UserController : GenericController<User>
 {
     
     private new readonly IUserService _service;
-    private readonly ITokenService _tokenService;
+    private readonly IAuthService _authService;
     public UserController(IUserService service) : base(service)
     {
         _service = service;

@@ -2,8 +2,8 @@ using Ecommerce.Models;
 
 namespace Ecommerce.Services.Interfaces
 {
-    public interface ITokenService
+    public interface IAuthService
     {
-        string GenerateToken(User user);
+        string CreateToken(User user);
     }
 }

@@ -8,16 +8,17 @@ using System.Text;
 
 namespace Ecommerce.Services
 {
-    public class TokenService : ITokenService
+    public class AuthService : IAuthService
     {
         private readonly JwtSettings _jwtSettings; //Uygulama ayarlarından gelen JWT yapılandırmalarını tutar 
 
-        public TokenService(IOptions<JwtSettings> jwtSettings) //appsettings.json veya appsettings.Development.json dosyasından ayarları okumak için kullanılır.
+        public AuthService(IOptions<JwtSettings> jwtSettings) //appsettings.json veya appsettings.Development.json dosyasından ayarları okumak için kullanılır.
         {
             _jwtSettings = jwtSettings.Value; //içerisindeki gerçek değere erişmek için.
         }
+        
 
-        public string GenerateToken(User user) //Kullanıcıyı parametre olarak alır ve bu kullanıcıya özel bir JWT üretir.
+        public string CreateToken(User user) //Kullanıcıyı parametre olarak alır ve bu kullanıcıya özel bir JWT üretir.
         
         {
             var claims = new[] //JWT’ye eklenecek kullanıcı bilgilerini belirtir.
@@ -36,7 +37,7 @@ namespace Ecommerce.Services
                 issuer: _jwtSettings.Issuer, //kim üretti
                 audience: _jwtSettings.Audience, // kim kullanacak
                 claims: claims, //yukarıda tanımlanan kullanıcı bilgileri
-                expires: DateTime.UtcNow.AddMinutes(_jwtSettings.ExpirationInMinutes), //token’in geçerlilik süresi. 
+                expires: DateTime.UtcNow.AddMinutes(_jwtSettings.DeadLine), //token’in geçerlilik süresi. 
                 signingCredentials: creds 
             );
             return new JwtSecurityTokenHandler().WriteToken(token);

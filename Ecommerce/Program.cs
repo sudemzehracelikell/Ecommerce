@@ -36,7 +36,7 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services.AddScoped(typeof(IEnumarableRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped(typeof(IQueryableRepository<>), typeof(GenericRepository<>));
@@ -109,7 +109,6 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-// ---- Pipeline ----
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
