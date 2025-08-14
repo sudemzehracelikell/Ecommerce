@@ -56,12 +56,10 @@ builder.Services.AddCors(options =>
 }); 
 
 
-builder.Services.AddAuthentication(x =>
+builder.Services.AddAuthentication(options =>
     {
-        x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-        x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-        x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
     }
 ).AddJwtBearer(options =>
 {
@@ -120,17 +118,6 @@ app.UseCors("AllowFrontend");
 
 app.UseAuthentication();  
 app.UseAuthorization();    
-
-
-app.UseHttpsRedirection();
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-app.UseCors("AllowFrontend");
-app.UseHttpsRedirection();
-app.UseAuthorization();
 
 
 app.MapControllers();

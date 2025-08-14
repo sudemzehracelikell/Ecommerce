@@ -29,16 +29,17 @@ namespace Ecommerce.Services
                 new Claim("Email", user.EMail ?? "") //özel bir claim, kullanıcının e-posta adresi.
                 
             };
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.SecretKey)); //Shared secret key ile JWT’yi imzalamak için kullanılır.
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256); //Token’in geçerliliğini imzalamak için algoritma ve anahtarı kullanır.
-
-
+            
             var token = new JwtSecurityToken( //token’ı :
                 issuer: _jwtSettings.Issuer, //kim üretti
                 audience: _jwtSettings.Audience, // kim kullanacak
                 claims: claims, //yukarıda tanımlanan kullanıcı bilgileri
                 expires: DateTime.UtcNow.AddMinutes(_jwtSettings.DeadLine), //token’in geçerlilik süresi. 
-                signingCredentials: creds 
+                signingCredentials: new Microsoft.IdentityModel.Tokens.SigningCredentials(
+                    new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(
+                        System.Text.Encoding.UTF8.GetBytes(_jwtSettings.SecretKey)),
+                Microsoft.IdentityModel.Tokens.SecurityAlgorithms.HmacSha256 
+                )
             );
             return new JwtSecurityTokenHandler().WriteToken(token);
         }

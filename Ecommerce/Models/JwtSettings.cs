@@ -10,5 +10,4 @@ public class JwtSettings
         public int DeadLine { get; set; }
         
         //
-        
 }
