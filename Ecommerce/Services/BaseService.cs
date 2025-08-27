@@ -16,7 +16,6 @@ public class BaseService<TEntity> : Interfaces.IBaseService<TEntity> where TEnti
         _queryRepository = queryRepository;
     }
 
-    //IEnumarable
     public virtual async Task<IEnumerable<TEntity>> GetAll()
     => await _enumRepository.GetAll();
 
@@ -32,8 +31,7 @@ public class BaseService<TEntity> : Interfaces.IBaseService<TEntity> where TEnti
     public virtual async Task Delete(int id)
     => await _enumRepository.Delete(id);
 
-
-    //Queryable
+    
     public virtual IQueryable<TEntity> GetAllQueryable()
     => _queryRepository.GetAllQueryable();
 

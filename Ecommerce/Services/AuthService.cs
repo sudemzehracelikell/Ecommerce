@@ -22,10 +22,10 @@ namespace Ecommerce.Services
         {
             var claims = new[] 
             {
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()), // kullanıcı ID
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()), 
                 new Claim(ClaimTypes.Name, user.Name ?? ""), 
                 new Claim(ClaimTypes.Role, user.UserType.ToString()),
-                new Claim("Email", user.EMail ?? "") //özel bir claim, kullanıcının e-posta adresi.
+                new Claim("Email", user.EMail ?? "") 
                 
             };
                         
@@ -33,8 +33,7 @@ namespace Ecommerce.Services
             var token = new JwtSecurityToken( //token’ı :
                 issuer: _jwtSettings.Issuer, //kim üretti
                 audience: _jwtSettings.Audience, // kim kullanacak
-                claims: claims, //yukarıda tanımlanan kullanıcı bilgileri
-                notBefore: now, 
+                claims: claims, 
                 expires: now.AddMinutes(_jwtSettings.ExpireMinutes),
                 signingCredentials: new Microsoft.IdentityModel.Tokens.SigningCredentials(
                     new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(

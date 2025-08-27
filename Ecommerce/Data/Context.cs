@@ -33,7 +33,7 @@ namespace Ecommerce.Data
                 .WithMany(u => u.Orders)
                 .HasForeignKey(o => o.UserId);
 
-            //ProductVariant
+            
             modelBuilder.Entity<ProductVariant>()
                 .HasOne(pv => pv.Product)
                 .WithMany(p => p.ProductVariants)
@@ -43,7 +43,7 @@ namespace Ecommerce.Data
                 .HasMany(pv => pv.Variants)
                 .WithMany(v => v.ProductVariants);
 
-            //OrderItem
+            
             modelBuilder.Entity<OrderItem>()
                 .HasKey(oi => new { oi.OrderId, oi.ProductVariantId });  
 

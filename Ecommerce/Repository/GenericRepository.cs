@@ -11,7 +11,7 @@ public class GenericRepository<TEntity> : IQueryableRepository<TEntity>, IEnumar
 {
 
     private readonly Context _context;
-    private readonly DbSet<TEntity> table; // !!!!!!!
+    private readonly DbSet<TEntity> table; 
 
     public GenericRepository(Context context)
     {
@@ -19,7 +19,7 @@ public class GenericRepository<TEntity> : IQueryableRepository<TEntity>, IEnumar
         table = _context.Set<TEntity>();
     }
 
-    //Ienumarable methods
+    
     public async Task SaveChange()
     {
         await _context.SaveChangesAsync();

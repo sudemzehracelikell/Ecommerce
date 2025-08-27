@@ -12,7 +12,7 @@ namespace Ecommerce.Controllers
     public class AuthController : ControllerBase
     {
         private readonly IUserService _userService;
-        private readonly IAuthService _authService; //JWT token üretmek için servis
+        private readonly IAuthService _authService; 
 
         public AuthController(IUserService userService, IAuthService authService)
         {
@@ -36,7 +36,7 @@ namespace Ecommerce.Controllers
                 Password = BCrypt.Net.BCrypt.HashPassword(request.Password)
             };
             
-            _userService.Create(user); // Kullanıcıyı veri tabanına kaydet
+            _userService.Create(user); 
 
             return Ok("User registered successfully.");
         }

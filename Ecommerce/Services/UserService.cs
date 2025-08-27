@@ -20,7 +20,6 @@ public class UserService : BaseService<User>, Interfaces.IUserService
         var user = _queryRepository.FilterBy(u => u.EMail.ToLower() == email.ToLower()).FirstOrDefault();
         if (user == null) return null;
 
-        // BCrypt ile şifre doğrulama
         if (!BCrypt.Net.BCrypt.Verify(password, user.Password))
             return null;
 
