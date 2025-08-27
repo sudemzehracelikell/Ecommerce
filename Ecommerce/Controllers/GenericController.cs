@@ -1,10 +1,14 @@
+using Ecommerce.Models;
 using Microsoft.AspNetCore.Mvc;
 using Ecommerce.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Ecommerce.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
+
 public class GenericController<TEntity> : ControllerBase where TEntity : class
 {
     public readonly IBaseService<TEntity> _service;

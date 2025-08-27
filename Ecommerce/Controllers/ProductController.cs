@@ -1,12 +1,15 @@
 using System.Threading.Tasks;
 using Ecommerce.Models;
 using Ecommerce.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ecommerce.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
+
 public class ProductController : GenericController<Product>
 {
     private new readonly IProductService _service;

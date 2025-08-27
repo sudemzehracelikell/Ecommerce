@@ -9,7 +9,7 @@ namespace Ecommerce.Models
         public int Code {get;set;}
         public Boolean State { get; set; }
         
-        public string PasswordHash { get; set; }
+        public string Password { get; set; }
         public ICollection<Order>?  Orders { get; set; }
         
     }

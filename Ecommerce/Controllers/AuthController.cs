@@ -2,6 +2,7 @@ using Ecommerce.Models;
 using Ecommerce.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using BCrypt.Net;
+using ECommerce.Validators;
 using Microsoft.AspNetCore.Authorization;
 
 namespace Ecommerce.Controllers
@@ -20,58 +21,37 @@ namespace Ecommerce.Controllers
         }
 
         [HttpPost("register")]
-        public IActionResult Register([FromBody] User request)
+        public IActionResult Register([FromBody] RegisterModel request)
         {
-            
-            if (_userService.GetUserByName(request.Name!)?.Any() == true)
-                
+            if (_userService.GetUserByName(request.Email!)?.Any() == true)
                 return BadRequest("This username is already taken.");
 
-            // Parola hashleme
-            request.PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.PasswordHash); //hashleme algoritması
-
+            var user = new User
+            {
+                Name = request.Name,
+                EMail = request.Email,
+                PhoneNumber = request.PhoneNumber,
+                UserType = UserType.User,
+                State = true,
+                Password = BCrypt.Net.BCrypt.HashPassword(request.Password)
+            };
             
-            _userService.Create(request); // Kullanıcıyı veri tabanına kaydet
+            _userService.Create(user); // Kullanıcıyı veri tabanına kaydet
 
             return Ok("User registered successfully.");
         }
 
         [HttpPost("login")]
-        public IActionResult Login([FromBody] User login)
+        public IActionResult Login([FromBody] LoginModel model)
         {
-            var user = _userService.GetUserByName(login.Name ?? "").FirstOrDefault();
-            if (user == null)
-            {
-                return BadRequest("There is not user");
-            }
-            
-            if (user.Name != login.Name)
-            {
-                return BadRequest("User not found");
-            }
-            
-            if (!BCrypt.Net.BCrypt.Verify(login.PasswordHash, user.PasswordHash))
-            {
-                return BadRequest("Password is wrong");
-            }
-            
-            
+           var validator = new LoginValidator().Validate(model);
+            if(!validator.IsValid)
+                throw new Exception(string.Join(",",validator.Errors.Select(x => x.ErrorMessage)));
+
+            var user = _userService.Authenticate(model.Email,  model.Password);
+
             string token = _authService.CreateToken(user); // JWT token üret
             return Ok(new { token }); // Token’ı JSON olarak döndür    ??
         }
-        [Authorize]
-        [HttpGet]
-        public IActionResult AuthanticatedOnlyEndpoint()
-        {
-            return Ok("You are Authanticated");
-        }
-        
-        [Authorize(Roles = "Admin, User, Company")]
-        [HttpGet]
-        public IActionResult AdminEndpoint()
-        {
-            return Ok("You are Authanticated");
-        }
     }
-    
 }

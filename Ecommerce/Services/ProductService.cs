@@ -25,6 +25,8 @@ public class ProductService : BaseService<Product>, Interfaces.IProductService
         {
             throw new ArgumentException("Please enter a number greater than zero ");
         }
+        
+        return _queryRepository.GetAllQueryable().Where(x => x.BasePrice <= maxPrice);
         return _queryRepository.FilterBy(p => p.BasePrice <= maxPrice);
     }
 
@@ -43,7 +45,7 @@ public class ProductService : BaseService<Product>, Interfaces.IProductService
                 .ThenInclude(pc => pc.Category)
             .Where(p => p.ProductCategory.Any(pc => pc.CategoryId == categoryId))
             .ToList();
-
+        
         var productDtos = products.Select(p => new ProductDto
         {
             Id = p.Id,
@@ -134,4 +136,7 @@ public class ProductService : BaseService<Product>, Interfaces.IProductService
         return null;
     } 
 
+    
+    
+    
 }

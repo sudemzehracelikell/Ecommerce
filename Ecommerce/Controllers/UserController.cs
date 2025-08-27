@@ -1,12 +1,14 @@
 
 using Ecommerce.Models;
 using Ecommerce.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ecommerce.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class UserController : GenericController<User>
 {
     

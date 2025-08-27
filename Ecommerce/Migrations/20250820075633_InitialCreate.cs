@@ -55,7 +55,8 @@ namespace ECommerce.Migrations
                     PhoneNumber = table.Column<string>(type: "text", nullable: true),
                     UserType = table.Column<int>(type: "integer", nullable: false),
                     Code = table.Column<int>(type: "integer", nullable: false),
-                    State = table.Column<bool>(type: "boolean", nullable: false)
+                    State = table.Column<bool>(type: "boolean", nullable: false),
+                    Password = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -128,8 +129,8 @@ namespace ECommerce.Migrations
                 {
                     ProductId = table.Column<int>(type: "integer", nullable: false),
                     CategoryId = table.Column<int>(type: "integer", nullable: false),
-                    Id = table.Column<int>(type: "integer", nullable: false),
-                    Quantity = table.Column<int>(type: "integer", nullable: false)
+                    Quantity = table.Column<int>(type: "integer", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -175,9 +176,9 @@ namespace ECommerce.Migrations
                 {
                     OrderId = table.Column<int>(type: "integer", nullable: false),
                     ProductVariantId = table.Column<int>(type: "integer", nullable: false),
-                    Id = table.Column<int>(type: "integer", nullable: false),
                     Quantity = table.Column<int>(type: "integer", nullable: false),
-                    UnitPrice = table.Column<float>(type: "real", nullable: false)
+                    UnitPrice = table.Column<float>(type: "real", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {

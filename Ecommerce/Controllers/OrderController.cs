@@ -1,11 +1,13 @@
 using Microsoft.AspNetCore.Mvc;
 using Ecommerce.Services.Interfaces;
 using Ecommerce.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Ecommerce.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
 public class OrderController : GenericController<Order>
 {
     private new readonly IOrderService _service;

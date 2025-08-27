@@ -1,11 +1,14 @@
 using Ecommerce.Models;
 using Ecommerce.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ecommerce.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[Authorize]
+
 public class CategoryController : GenericController<Category>
 {
     private new readonly ICategoryService _service;
@@ -23,4 +26,6 @@ public class CategoryController : GenericController<Category>
         
         return categories is {Count :> 0} ? Ok(categories.ToList()) : NotFound();
     }
+
+    
 }

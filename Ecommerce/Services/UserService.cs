@@ -15,13 +15,13 @@ public class UserService : BaseService<User>, Interfaces.IUserService
         return u ?? null;
     }
 
-    public User? Authenticate(string name, string password)
+    public User? Authenticate(string email, string password)
     {
-        var user = _queryRepository.FilterBy(u => u.Name ==name).FirstOrDefault();
+        var user = _queryRepository.FilterBy(u => u.EMail.ToLower() == email.ToLower()).FirstOrDefault();
         if (user == null) return null;
 
         // BCrypt ile şifre doğrulama
-        if (!BCrypt.Net.BCrypt.Verify(password, user.PasswordHash))
+        if (!BCrypt.Net.BCrypt.Verify(password, user.Password))
             return null;
 
         return user;
@@ -29,7 +29,7 @@ public class UserService : BaseService<User>, Interfaces.IUserService
 
     public void CreateUser(User user, string password)
     {
-        user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(password);
+        user.Password = BCrypt.Net.BCrypt.HashPassword(password);
         _enumRepository.Update(user);
     
     }

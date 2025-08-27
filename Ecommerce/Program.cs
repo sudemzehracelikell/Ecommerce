@@ -14,74 +14,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<JwtSettings>(
     builder.Configuration.GetSection("JwtSettings"));
 var jwtSettings = builder.Configuration.GetSection("JwtSettings").Get<JwtSettings>();
+
 if (jwtSettings is null || string.IsNullOrWhiteSpace(jwtSettings.SecretKey))
 {
     throw new InvalidOperationException("JwtSettings.SecretKey is missing in configuration.");
 }
 var signingKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.SecretKey));
 
-var key = Encoding.UTF8.GetBytes(jwtSettings.SecretKey);
-
-
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(); 
-
 builder.Services.AddControllers();
-
-
-
-builder.Services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
-builder.Services.AddScoped<IBrandService, BrandService>();
-builder.Services.AddScoped<ICategoryService, CategoryService>();
-builder.Services.AddScoped<IOrderService, OrderService>();
-builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped<IUserService, UserService>();
-builder.Services.AddScoped<IAuthService, AuthService>();
-
-builder.Services.AddScoped(typeof(IEnumarableRepository<>), typeof(GenericRepository<>));
-builder.Services.AddScoped(typeof(IQueryableRepository<>), typeof(GenericRepository<>));
-builder.Services.AddDbContext<Context>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-
-var app = builder.Build();
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowFrontend", policy =>
-    {
-        policy.WithOrigins("http://localhost:3000")
-            .AllowAnyHeader()
-            .AllowAnyMethod();
-    });
-}); 
-
-
-builder.Services.AddAuthentication(options =>
-    {
-        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    }
-).AddJwtBearer(options =>
-{
-    options.RequireHttpsMetadata = false; // dev ortamı için. Prod'da true yap
-    options.SaveToken = true;
-    options.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
-
-        ValidIssuer = jwtSettings.Issuer,
-        ValidAudience = jwtSettings.Audience,
-        IssuerSigningKey = signingKey,
-
-        ClockSkew = TimeSpan.Zero // token süresi biter bitmez geçersiz olsun
-    };
-});
-
-builder.Services.AddAuthorization();
-
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -107,19 +47,67 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
-if (app.Environment.IsDevelopment())
+// Servis kayıtları
+builder.Services.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
+builder.Services.AddScoped<IBrandService, BrandService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
+
+builder.Services.AddScoped(typeof(IEnumarableRepository<>), typeof(GenericRepository<>));
+builder.Services.AddScoped(typeof(IQueryableRepository<>), typeof(GenericRepository<>));
+
+builder.Services.AddDbContext<Context>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// CORS
+builder.Services.AddCors(options =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+    options.AddPolicy("AllowFrontend", policy =>
+    {
+        policy.WithOrigins("http://localhost:3000")
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+    });
+});
+
+// JWT Authentication
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.RequireHttpsMetadata = false; // Development ortamı
+    options.SaveToken = true;
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = jwtSettings.Issuer,
+        ValidAudience = jwtSettings.Audience,
+        IssuerSigningKey = signingKey,
+        ClockSkew = TimeSpan.Zero
+    };
+});
+
+builder.Services.AddAuthorization();
+
+var app = builder.Build();
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 app.UseCors("AllowFrontend");
-
-app.UseAuthentication();  
-app.UseAuthorization();    
-
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run(); 
+app.Run();

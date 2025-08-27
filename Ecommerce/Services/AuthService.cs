@@ -10,31 +10,32 @@ namespace Ecommerce.Services
 {
     public class AuthService : IAuthService
     {
-        private readonly JwtSettings _jwtSettings; //Uygulama ayarlarından gelen JWT yapılandırmalarını tutar 
+        private readonly JwtSettings _jwtSettings;  
 
-        public AuthService(IOptions<JwtSettings> jwtSettings) //appsettings.json veya appsettings.Development.json dosyasından ayarları okumak için kullanılır.
+        public AuthService(IOptions<JwtSettings> jwtSettings) 
         {
-            _jwtSettings = jwtSettings.Value; //içerisindeki gerçek değere erişmek için.
+            _jwtSettings = jwtSettings.Value; 
         }
         
 
-        public string CreateToken(User user) //Kullanıcıyı parametre olarak alır ve bu kullanıcıya özel bir JWT üretir.
-        
+        public string CreateToken(User user) 
         {
-            var claims = new[] //JWT’ye eklenecek kullanıcı bilgilerini belirtir.
+            var claims = new[] 
             {
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()), //genelde kullanıcı ID'si için kullanılır.
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()), // kullanıcı ID
                 new Claim(ClaimTypes.Name, user.Name ?? ""), 
                 new Claim(ClaimTypes.Role, user.UserType.ToString()),
                 new Claim("Email", user.EMail ?? "") //özel bir claim, kullanıcının e-posta adresi.
                 
             };
-            
+                        
+            var now = DateTime.UtcNow;
             var token = new JwtSecurityToken( //token’ı :
                 issuer: _jwtSettings.Issuer, //kim üretti
                 audience: _jwtSettings.Audience, // kim kullanacak
                 claims: claims, //yukarıda tanımlanan kullanıcı bilgileri
-                expires: DateTime.UtcNow.AddMinutes(_jwtSettings.DeadLine), //token’in geçerlilik süresi. 
+                notBefore: now, 
+                expires: now.AddMinutes(_jwtSettings.ExpireMinutes),
                 signingCredentials: new Microsoft.IdentityModel.Tokens.SigningCredentials(
                     new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(
                         System.Text.Encoding.UTF8.GetBytes(_jwtSettings.SecretKey)),
