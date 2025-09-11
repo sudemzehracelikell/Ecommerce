@@ -4,7 +4,7 @@ using Ecommerce.Repository;
 
 namespace Ecommerce.Services;
 
-public class BaseService<TEntity> : Interfaces.IBaseService<TEntity> where TEntity : BaseEntity
+public class BaseService<TEntity> : Interfaces.IBaseService<TEntity> where TEntity : class
 {
     protected readonly IEnumarableRepository<TEntity> _enumRepository;
     protected readonly IQueryableRepository<TEntity> _queryRepository;

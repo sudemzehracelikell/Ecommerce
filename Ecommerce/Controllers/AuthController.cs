@@ -23,17 +23,17 @@ namespace Ecommerce.Controllers
         [HttpPost("register")]
         public IActionResult Register([FromBody] RegisterModel request)
         {
-            if (_userService.GetUserByName(request.Email!)?.Any() == true)
+            if (_userService.GetUserByName(request.Name!)?.Any() == true)
                 return BadRequest("This username is already taken.");
 
             var user = new User
             {
                 Name = request.Name,
-                EMail = request.Email,
+                Email = request.Email,
                 PhoneNumber = request.PhoneNumber,
                 UserType = UserType.User,
                 State = true,
-                Password = BCrypt.Net.BCrypt.HashPassword(request.Password)
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword(request.Password)
             };
             
             _userService.Create(user); 
@@ -47,10 +47,10 @@ namespace Ecommerce.Controllers
            var validator = new LoginValidator().Validate(model);
             if(!validator.IsValid)
                 throw new Exception(string.Join(",",validator.Errors.Select(x => x.ErrorMessage)));
-
+        
             var user = _userService.Authenticate(model.Email,  model.Password);
 
-            string token = _authService.CreateToken(user); // JWT token üret
+            string token = _authService.CreateToken(user); 
             return Ok(new { token }); // Token’ı JSON olarak döndür    ??
         }
     }

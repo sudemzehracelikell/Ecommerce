@@ -18,7 +18,7 @@ public class OrderController : GenericController<Order>
     }
 
     [HttpGet("user-orders/{userId}")]
-    public IActionResult GetUserOrders(int userId)
+    public IActionResult GetUserOrders(string userId)
     {
         var orders = _service.GetUserOrders(userId);
         return orders != null ? Ok(orders.ToList()) : NotFound();

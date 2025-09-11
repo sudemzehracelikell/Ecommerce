@@ -17,10 +17,10 @@ public class UserService : BaseService<User>, Interfaces.IUserService
 
     public User? Authenticate(string email, string password)
     {
-        var user = _queryRepository.FilterBy(u => u.EMail.ToLower() == email.ToLower()).FirstOrDefault();
+        var user = _queryRepository.FilterBy(u => u.Email.ToLower() == email.ToLower()).FirstOrDefault();
         if (user == null) return null;
 
-        if (!BCrypt.Net.BCrypt.Verify(password, user.Password))
+        if (!BCrypt.Net.BCrypt.Verify(password, user.PasswordHash))
             return null;
 
         return user;
@@ -28,7 +28,7 @@ public class UserService : BaseService<User>, Interfaces.IUserService
 
     public void CreateUser(User user, string password)
     {
-        user.Password = BCrypt.Net.BCrypt.HashPassword(password);
+        user.PasswordHash = BCrypt.Net.BCrypt.HashPassword(password);
         _enumRepository.Update(user);
     
     }

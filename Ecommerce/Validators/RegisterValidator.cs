@@ -9,7 +9,7 @@ public class RegisterValidator : AbstractValidator<RegisterModel>
     {
         RuleFor(x => x.Email).NotEmpty().EmailAddress();
         RuleFor(x =>x.Name).NotEmpty();
-        RuleFor(x=>x.PhoneNumber).NotEmpty();
+        RuleFor(x=>x.PhoneNumber).NotEmpty(); 
         RuleFor(x => x.Password).NotEmpty();
         
     }

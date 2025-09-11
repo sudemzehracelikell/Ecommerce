@@ -25,7 +25,7 @@ namespace Ecommerce.Services
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()), 
                 new Claim(ClaimTypes.Name, user.Name ?? ""), 
                 new Claim(ClaimTypes.Role, user.UserType.ToString()),
-                new Claim("Email", user.EMail ?? "") 
+                new Claim("Email", user.Email ?? "") 
                 
             };
                         

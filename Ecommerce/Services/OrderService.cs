@@ -9,7 +9,7 @@ public class OrderService : BaseService<Order>, Interfaces.IOrderService
     : base(_enumRepository, _queryRepository)
     { }
 
-    public IQueryable<Order>? GetUserOrders(int userId)
+    public IQueryable<Order>? GetUserOrders(string userId)
     {
         var o = _queryRepository.FilterBy(o => o.UserId == userId);
         return o ?? null; // o != null ? o : null
